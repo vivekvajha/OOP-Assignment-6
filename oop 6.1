@@ -1,0 +1,96 @@
+#include<iostream>
+using namespace std;
+class TEE;          //forward declaration of class TEE
+class ICA           //class TEE created
+{
+    private:
+    int oop, math, se, ds;
+    
+    public:
+    void readMarksICA()
+    {
+        cout<<"Enter the ICA marks of OOP out of 50: "<<endl;
+        cin>>oop;
+    
+        cout<<"Enter the ICA marks of math out of 50: "<<endl;
+        cin>>math;
+    
+        cout<<"Enter the ICA marks of SE out of 50: "<<endl;
+        cin>>se;
+    
+        cout<<"Enter the ICA marks of DS out of 50: "<<endl;
+        cin>>ds;
+    }
+    
+    //declaration of friend functions
+    friend int total(ICA, TEE);         
+    friend int total1(ICA, TEE);
+    friend int total2(ICA, TEE);
+    friend int total3(ICA, TEE);
+};
+
+class TEE                                  //class TEE created
+{
+    private:
+    int oopTEE, mathTEE, seTEE, dsTEE;
+    
+    public:
+    void readMarksTEE()
+    {
+        cout<<"Enter the TEE marks of OOP out of 50: "<<endl;
+        cin>>oopTEE;
+    
+        cout<<"Enter the TEE marks of math out of 50: "<<endl;
+        cin>>mathTEE;
+    
+        cout<<"Enter the TEE marks of SE out of 50: "<<endl;
+        cin>>seTEE;
+    
+        cout<<"Enter the TEE marks of DS out of 50: "<<endl;
+        cin>>dsTEE;
+        
+    }
+    
+    //declaration of friend functions
+    friend int total(ICA, TEE);
+    friend int total1(ICA, TEE);
+    friend int total2(ICA, TEE);
+    friend int total3(ICA, TEE);
+};
+
+
+int total(ICA i,TEE t)      //friend function "int total" definition
+{
+    return(i.oop+t.oopTEE);
+}
+
+int total1(ICA e,TEE f)     //friend function "int total1" definition
+{
+    return(e.math+f.mathTEE);
+}
+
+int total2(ICA r,TEE s)     //friend function "int total2" definition
+{
+    return(r.se+s.seTEE);
+}
+
+int total3(ICA e,TEE f)    //friend function "int total3" definition
+{
+    return(e.ds+f.dsTEE);
+}
+ 
+int main()
+{
+    ICA a;                 //object a created
+    TEE b;                 //object b created
+    
+    a.readMarksICA();
+    b.readMarksTEE();
+    
+    cout<<"The total marks of OOP  are:  "<<total(a, b)<<endl;
+    cout<<"The total marks of math  are:  "<<total1(a, b)<<endl;
+    cout<<"The total marks of SE  are:  "<<total2(a, b)<<endl;
+    cout<<"The total marks of DS  are:  "<<total3(a, b)<<endl;
+    
+    
+}
