@@ -1,0 +1,97 @@
+#include<iostream>
+using namespace std;
+
+class Employee                       //class Employee created
+{
+    private:
+    char name[30];
+    int id;
+    char department[30];
+    float salary;
+    
+    public:
+    void readEmployeeData()          //function for reading employee data
+    {
+        cout<<"Enter the name of the employee: "<<endl;
+        cin>>name;
+        
+        cout<<"Enter the employee ID: "<<endl;
+        cin>>id;
+        
+        cout<<"Enter the department of employee: "<<endl;
+        cin>>department;
+        
+        cout<<"Enter the salary of the employee: "<<endl;
+        cin>>salary;
+    }
+    void displayEmployeeData()             //function for displaying 
+    {
+        cout<<"Employee name: "<<name<<endl;
+        cout<<"Employee ID: "<<id<<endl;
+        cout<<"Employee Department: "<<department<<endl;
+        cout<<"Employee salary: "<<salary<<endl;
+    }    
+    friend class Sales;                   //declaring Sales as friend class 
+};
+
+class Sales
+{
+    private:
+    int sales;
+    float incentives;
+    
+    public:
+    void readSalesData(Employee o)                 //function for calculating incentives
+    {
+        cout<<"Enter the monthly sales"<<endl;
+        cin>>sales;
+        
+        if(sales>50 && sales<100)
+        {
+            incentives=0.10*(o.salary);            //since class Sales is a friend of class Employee
+        }                                          //therefore Sales can access the private data members of Employee
+        else if(sales>100 && sales<150)            //in this case salary is a data member of class Employee
+        {
+            incentives=0.20*(o.salary);
+        }
+        else if(sales>150)
+        {
+            incentives=0.30*(o.salary);
+        }
+        cout<<"The incentives acquired are: "<<incentives<<endl;
+    }
+    void Performance()                                     //function for calculatingthe performance of the employee
+    {
+        if(sales<50)
+        {
+            cout<<"Your performance is POOR"<<endl;
+        }
+        if(sales>50 && sales<100)
+        {
+            cout<<"Your performance is SATISFACTORY"<<endl;
+        }
+        else if(sales>100 && sales<150)
+        {
+            cout<<"Your performance is GOOD"<<endl;
+        }
+        else if(sales>150)
+        {
+            cout<<"Your performance is EXCELLENT!"<<endl;
+        }
+        
+    }
+    
+};
+int main()	
+{
+
+	Employee E;                      //object E created
+	Sales S;                         //object S created
+	
+    E.readEmployeeData();
+	S.readSalesData(E);             //readSalesData can read data from class Employee
+	E.displayEmployeeData();
+	S.Performance();
+	
+
+}
